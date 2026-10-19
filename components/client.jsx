@@ -454,8 +454,7 @@ export function BgmPlayer({ id, label = 'WR BGM' }) {
       )}
       <button className="bgm__btn" onClick={() => setOn((v) => !v)} aria-pressed={on}
               aria-label={on ? `${label} 끄기` : `${label} 듣기`}>
-        <span className="bgm__eq" aria-hidden="true"><i /><i /><i /></span>
-        {on ? `${label} 끄기` : `♪ ${label} 듣기`}
+        {on ? `■ ${label} 끄기` : `♪ ${label} 듣기`}
       </button>
     </div>
   );

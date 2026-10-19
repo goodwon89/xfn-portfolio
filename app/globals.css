@@ -617,11 +617,12 @@ main { position: relative; z-index: 2; background: var(--c-bg); transition: back
 .bgm__btn { min-height: 36px !important; }
 @media (max-width: 959px) {
   .bgm { top: auto; left: auto; right: var(--pad); bottom: var(--pad); flex-direction: column-reverse; align-items: flex-end; }
-  .bgm__btn { min-height: 44px !important; background: rgb(var(--bg) / .6); }
+  .bgm__btn { min-height: 44px !important; }
 }
 .bgm__btn {
   display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px;
-  border: 1px solid #fff; color: #fff; mix-blend-mode: difference; font-size: 13px; font-weight: 700; border-radius: 999px;
+  border: 1px solid currentColor; color: var(--c-fg); background: rgb(var(--bg) / 0.72); font-size: 13px; font-weight: 700; border-radius: 999px;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: color 680ms var(--ease-quint), background-color 680ms var(--ease-quint);
 }
 .bgm__eq { display: inline-flex; gap: 2px; align-items: flex-end; height: 12px; }
 .bgm__eq i { width: 2px; height: 4px; background: currentColor; }
