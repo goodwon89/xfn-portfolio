@@ -340,9 +340,10 @@ main { position: relative; z-index: 2; background: var(--c-bg); transition: back
 }
 .cards--3 .card { grid-column: span 4; }
 .card__fill { position: absolute; inset: 0; z-index: -1; background: var(--c-fg); transform: translateY(calc((1 - var(--f, 0)) * 101%)); }
-.card.is-on { color: var(--c-bg); }
-.card.is-on .sub, .card.is-on .note, .card.is-on .mute { color: rgb(var(--bg) / 0.72); }
-.card.is-on .card__foot { border-color: rgb(var(--bg) / 0.3); }
+/* 흰 면이 올라오는 동안 글자가 픽셀 단위로 반전되도록 difference 블렌드 사용 */
+.card:not(.card--plan) > :not(.card__fill) { color: #fff; mix-blend-mode: difference; }
+.card:not(.card--plan) .note { color: rgba(255, 255, 255, 0.68); }
+:root[data-site-theme='light'] .card:not(.card--plan) { background: rgb(17 17 17 / 0.06); }
 .card--plan { background: transparent; border: 1px dashed var(--line-strong); }
 .card--plan .card__fill { display: none; }
 .card__code { font-weight: 700; font-size: var(--fs-label); }
