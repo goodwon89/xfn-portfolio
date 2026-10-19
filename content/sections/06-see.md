@@ -9,17 +9,18 @@ layout: case-cards           # DESIGN.md §5
 cards:
   - name: "8개 접점"
     meta: "6개사 · 43/43"
-    hover_copy: ["포스터가 아닙니다.", "매일 지나치는 8개의 접점입니다."]
+    hover_copy: ["한 번의 캠페인이 아닙니다.", "출근부터 퇴근까지 이어지는 동선입니다."]
     media: see-touchpoints.webp
   - name: "WR BGM"
     meta: "OG · Jazz · K-pop"
     hover_copy: ["사내 캠페인송이 아닙니다.", "부르다 보면 Mission으로 돌아오는 노래입니다."]
-    media: see-bgm.webp
-  - name: "제약 → 대안"
-    meta: "예외 5건 · 미결 0건"
-    hover_copy: ["예외 승인이 아닙니다.", "같은 기준을 지키는 다른 방법입니다."]
+    media: tp-08.webp
+    link: { label: "YouTube에서 듣기", href: "https://youtu.be/m9SLN_0EonA" }
+  - name: "공간 네이밍"
+    meta: "회의실 → 휴게실·폰부스"
+    hover_copy: ["회의실 이름이 아닙니다.", "문을 열 때마다 읽는 행동강령입니다."]
     media: see-space-naming.webp
-touchpoint_images: [tp-01-signage.webp, tp-02-banner.webp, tp-03-poster.webp, tp-04-wallpaper.webp, tp-05-naming.webp, tp-06-signature.webp, tp-07-goods.webp, null]
+touchpoint_images: [tp-01.webp, tp-02.webp, tp-03.webp, tp-04.webp, tp-05.webp, tp-06.webp, tp-07.webp, tp-08.webp]
 touchpoints:
   - "디지털 사이니지"
   - "출입구 배너"
@@ -33,6 +34,13 @@ bgm:
   title: "Winning Rules를 노래로 만들었습니다"
   body: "행동강령 문장을 그대로 가사로 썼습니다. 도전·연결·존중 세 곡의 후렴은 모두 같은 문장, 그룹 Mission인 \"상상으로 세상을 이롭게 한다\"입니다. 아홉 개 행동강령을 부르다 보면 결국 Mission으로 돌아오도록 만들었습니다."
   versions: ["OG", "Jazz", "K-pop"]
+  youtube:
+    title: "WR BGM"
+    caption: "Winning Rules 노래 — 각 사 공용공간에서 재생"
+    id: m9SLN_0EonA
+    url: "https://youtu.be/m9SLN_0EonA"
+    embed: "https://www.youtube-nocookie.com/embed/m9SLN_0EonA"
+    poster: "https://i.ytimg.com/vi/m9SLN_0EonA/hqdefault.jpg"
   lyric_samples:
     - value: 도전
       lines: ["변화를 이끌거나, 비키거나.", "멈춰 서기보다 먼저 움직여"]
@@ -53,24 +61,24 @@ stats:
 constraints:
   title: "같은 기준을 지키고, 제약은 대안으로 풀었습니다"
   rows:
-    - company: "증권 계열사"
+    - company: "금융사 A"
       constraint: "화면보호기 해제 단계가 늘면 주문 처리가 늦어질 우려"
       alternative: "배경화면만 적용하고, 공간 네이밍을 휴게실·폰부스까지 확장"
-    - company: "저축은행 계열사"
+    - company: "금융사 B"
       constraint: "금융소비자보호로 PC 화면이 정책 지정 · 대회의실 TV 없음"
       alternative: "예외 승인 후 직원 동선 중심 포스터 배치 · 업무시스템 비밀번호로 대체"
-    - company: "공유 오피스 입주 계열사"
-      constraint: "TV·스피커를 직접 통제할 수 없음"
+    - company: "제조사 C"
+      constraint: "공유 오피스라 TV·스피커를 직접 통제할 수 없음"
       alternative: "사이니지용 콘텐츠를 포스터로 바꿔 부착"
 takeaway: "기준은 하나로 두되, 방법은 회사 사정에 맞춘다."
 sources: [p1-tracking, p1-exception]
 assets:
   - file: see-touchpoints.webp
-    desc: "사이니지 · 출입구 배너 · 회의실 명패 · 물티슈 케이스 현장 콜라주"
-  - file: see-bgm.webp
-    desc: "WR BGM 타이포그래픽 카드"
+    desc: "8개 접점 콜라주 (사이니지 · 배너 · 포스터 · PC 배경화면 · 공간 네이밍 · 이메일 서명 · 물티슈 케이스 · BGM)"
+  - file: tp-08.webp
+    desc: "공용공간 BGM 이미지"
   - file: see-space-naming.webp
-    desc: "회의실 명패(Horizon) 실 부착 사진 — 공간 네이밍을 휴게실·폰부스까지 확장"
+    desc: "회의실 명패(Horizon) 실 부착 사진"
 ---
 
 디자인은 그룹 공통으로 한 번 만들고, 각 사는 받아서 바로 설치할 수 있게 했습니다. 계열사마다 따로 만들면 비용이 늘고 메시지가 흩어지기 때문입니다.

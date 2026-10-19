@@ -44,13 +44,13 @@ evidence:
 
 by_company:
   title: "5개사 모두 올랐고, 가장 낮은 출발점에서 가장 크게 올랐습니다"
-  note: "계열사명은 익명 처리"
+  note: "계열사명은 익명 처리 · 업종 표기 없음"
   rows:
-    - { name: "A사", t0: 55.4, t1: 88.6, delta: "+33.3%p" }
-    - { name: "B사", t0: 26.7, t1: 74.4, delta: "+47.8%p", highlight: true }
-    - { name: "C사", t0: 74.1, t1: 84.6, delta: "+10.5%p" }
-    - { name: "D사", t0: 77.8, t1: 96.7, delta: "+18.9%p" }
-    - { name: "E사", t0: 65.2, t1: 93.5, delta: "+28.3%p" }
+    - { name: "참여사 1", t0: 55.4, t1: 88.6, delta: "+33.3%p" }
+    - { name: "참여사 2", t0: 26.7, t1: 74.4, delta: "+47.8%p", highlight: true }
+    - { name: "참여사 3", t0: 74.1, t1: 84.6, delta: "+10.5%p" }
+    - { name: "참여사 4", t0: 77.8, t1: 96.7, delta: "+18.9%p" }
+    - { name: "참여사 5", t0: 65.2, t1: 93.5, delta: "+28.3%p" }
 
 by_item:
   title: "80%를 넘은 문항, 0개 → 8개"

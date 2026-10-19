@@ -18,6 +18,9 @@ design:                       # DESIGN.md 참조
     label: "Winning Rules, loading ."
   marquee: "WINNING RULES · 일상의 언어 · "   # 15 closing 배경 마퀴
   wordmark: "GOODWON"         # 푸터 글자 리빌 워드마크 (Pretendard 800)
+  bgm:                        # 상단 고정 BGM 버튼 (클릭 시 재생 · 브라우저 정책상 자동 재생 불가)
+    youtube_id: m9SLN_0EonA
+    label: "WR BGM"
   cursor: true                # 십자선 + 도트 · 터치/reduced-motion 비활성
 
 nav:

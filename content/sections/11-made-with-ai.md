@@ -28,9 +28,10 @@ items:
     type: "음원"
     desc: "행동강령 문장을 가사로 쓴 도전·연결·존중 세 곡. OG · Jazz · K-pop 3개 버전."
     stack: ["Suno"]
-    result: "각 사 공용공간 활용 · 사내 YouTube 공개"
+    result: "각 사 공용공간 활용 · YouTube 공개"
+    link: { label: "YouTube에서 듣기", href: "https://youtu.be/m9SLN_0EonA" }
     owner: "본인"
-    asset: see-bgm.webp
+    asset: tp-08.webp
   - name: "P1 디자인물"
     hover_copy: ["디자인 용역이 아닙니다.", "그룹 공통 원본 12종입니다."]
     type: "환경 디자인"

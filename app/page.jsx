@@ -1,7 +1,7 @@
 import { getSite, getSections, getSources } from '@/lib/content';
 import { Hero, Closing, SECTION_COMPONENTS } from '@/components/sections';
 import { Footer } from '@/components/footer';
-import { Header, Motion, Intro, Cursor } from '@/components/client';
+import { Header, Motion, Intro, Cursor, BgmPlayer } from '@/components/client';
 
 export default function Page() {
   const site = getSite();
@@ -30,6 +30,7 @@ export default function Page() {
         })}
       </main>
       <Footer site={site} sections={sections} />
+      {site.design?.bgm && <BgmPlayer id={site.design.bgm.youtube_id} label={site.design.bgm.label} />}
       {site.design?.cursor && <Cursor />}
       <Motion />
     </>

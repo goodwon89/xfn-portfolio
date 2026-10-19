@@ -9,7 +9,7 @@ layout: contact-marquee           # DESIGN.md §5
 profile:
   name: 장근원
   title: "HR Strategist · 상상인그룹 인재경영실 과장"
-  summary: "프로야구단, 식품 유통, 금융그룹을 거친 약 10년 차 HR 제너럴리스트. 9개 계열사 HR 컨트롤타워에서 리더십 진단, 조직문화, 성과관리 제도, HR 디지털 도구 개발을 맡고 있습니다."
+  summary: "프로야구단, 식품 유통, 금융그룹을 거친 12년 차 HR 제너럴리스트. 9개 계열사 HR 컨트롤타워에서 리더십 진단, 조직문화, 성과관리 제도, HR 디지털 도구 개발을 맡고 있습니다."
   focus: ["조직문화 전략", "People Analytics", "성과관리 제도 설계", "HR 디지털 도구 개발 (Next.js · Python · React)"]
 contact:
   - { label: Email, value: "jangkeunwon@gmail.com", href: "mailto:jangkeunwon@gmail.com" }

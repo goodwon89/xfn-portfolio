@@ -1,4 +1,4 @@
-import { inline, imageUrl } from '@/lib/content';
+import { inline, imageUrl, imageSize } from '@/lib/content';
 
 /** 줄 단위 리빌 타이틀. "\n"으로 줄을 나눈다. */
 export function Lines({ text = '', as: Tag = 'h2', className = '', start = 0 }) {
@@ -142,10 +142,14 @@ export function DbLegend({ a = 'T0', b = 'T1', ref80 }) {
 }
 
 /** 이미지 — public/images에 파일이 있으면 그레이스케일 이미지, 없으면 자리표시자 */
+/** 이미지는 잘리지 않게 contain. 원본 비율이 프레임과 3% 넘게 다르면 여백(padding)을 둔다. */
 export function Media({ file, desc, ratio = '8 / 9', alt }) {
   const src = imageUrl(file);
+  const [rw, rh] = String(ratio).split('/').map((n) => parseFloat(n));
+  const size = imageSize(file);
+  const fits = size ? Math.abs(size[0] / size[1] - rw / rh) / (rw / rh) < 0.03 : false;
   return (
-    <div className="media" style={{ aspectRatio: ratio }}>
+    <div className={`media ${src && !fits ? 'media--pad' : ''}`} style={{ aspectRatio: ratio }}>
       {src && /\.(mp4|webm)$/i.test(file) ? (
         <video muted loop autoPlay playsInline preload="metadata" aria-label={alt || desc || ''}
                poster={imageUrl(file.replace(/\.(mp4|webm)$/i, '.poster.webp')) || undefined}>

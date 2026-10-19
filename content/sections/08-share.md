@@ -10,6 +10,7 @@ cover_card:
   name: "WR Spotlight"
   meta: "07.13 – 08.28 · 47일"
   hover_copy: ["시상식이 아닙니다.", "동료가 고른 일하는 방식입니다."]
+  guide: "https://ssi-wr.kr/guide/6"
   media: share-spotlight.webp
 process:
   - { step: "01 발견", desc: "동료가 현장의 Winning Moment를 추천" }

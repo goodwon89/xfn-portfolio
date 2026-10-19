@@ -60,6 +60,7 @@ export function Motion() {
       if (spacer && header) {
         const sr = spacer.getBoundingClientRect();
         header.classList.toggle('is-away', sr.top < vh * 0.6);
+        document.documentElement.classList.toggle('has-footer', sr.top < vh * 0.6);
       }
       if (marquee) {
         const mr = marquee.getBoundingClientRect();
@@ -99,6 +100,24 @@ export function Motion() {
     document.addEventListener('click', onClick);
 
     // 5) 워드마크 폭 맞춤
+    // 큰 숫자가 칸보다 넓으면 글자 크기를 줄여 한 줄에 맞춘다(잘림 방지).
+    const fitNums = () => {
+      document.querySelectorAll('.stat__v, .funnel__v, .vs__v, .mega__to, .cc__stat b, .hero__metric-v').forEach((el) => {
+        el.style.fontSize = '';
+        const avail = el.clientWidth;
+        const need = el.scrollWidth;
+        if (avail && need > avail + 1) {
+          const fs = parseFloat(getComputedStyle(el).fontSize);
+          el.style.fontSize = `${Math.floor(fs * (avail / need) * 0.98)}px`;
+        }
+      });
+    };
+    fitNums();
+    document.fonts?.ready.then(fitNums);
+    document.fonts?.addEventListener?.('loadingdone', fitNums);
+    const fitTimers = [400, 1200, 2500].map((ms) => setTimeout(fitNums, ms));
+    window.addEventListener('resize', fitNums);
+
     // 웹폰트가 늦게 로드되면 글자 폭이 바뀌므로 ResizeObserver로 다시 맞춘다.
     const wmText = document.querySelector('.wm__text');
     const fitWordmark = () => {
@@ -127,6 +146,9 @@ export function Motion() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       window.removeEventListener('resize', fitWordmark);
+      window.removeEventListener('resize', fitNums);
+      document.fonts?.removeEventListener?.('loadingdone', fitNums);
+      fitTimers.forEach(clearTimeout);
       window.removeEventListener('load', fitWordmark);
       document.fonts?.removeEventListener?.('loadingdone', fitWordmark);
       document.removeEventListener('click', onClick);
@@ -409,5 +431,32 @@ export function VideoFacade({ title, caption, embed, poster }) {
         <span className="note">{caption}</span>
       </figcaption>
     </figure>
+  );
+}
+
+/* ------------------------------------------------------------------
+   BGM — 클릭하면 WR BGM(YouTube)을 작은 플레이어로 재생.
+   브라우저 정책상 소리 있는 자동 재생은 막혀 있어 첫 재생은 클릭으로 시작한다.
+   (YouTube 약관상 플레이어를 숨기지 않고 작게 노출한다)
+------------------------------------------------------------------- */
+export function BgmPlayer({ id, label = 'WR BGM' }) {
+  const [on, setOn] = useState(false);
+  return (
+    <div className={`bgm ${on ? 'is-on' : ''}`}>
+      {on && (
+        <div className="bgm__panel">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&rel=0&modestbranding=1`}
+            title={`${label} 재생 중`}
+            allow="autoplay; encrypted-media; picture-in-picture"
+          />
+        </div>
+      )}
+      <button className="bgm__btn" onClick={() => setOn((v) => !v)} aria-pressed={on}
+              aria-label={on ? `${label} 끄기` : `${label} 듣기`}>
+        <span className="bgm__eq" aria-hidden="true"><i /><i /><i /></span>
+        {on ? `${label} 끄기` : `♪ ${label} 듣기`}
+      </button>
+    </div>
   );
 }

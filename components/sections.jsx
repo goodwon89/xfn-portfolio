@@ -1,6 +1,19 @@
 import { Lines, Html, Inline, SecHead, Body, Sources, Stat, Stats, Bars, Dumbbell, DbLegend, Media, assetDesc } from './ui';
 import { Quiz, BlindQuiz, Tabs, VideoFacade } from './client';
 
+const ext = (href) => (/^https?:/.test(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+
+/** 외부 링크 CTA (가이드 · YouTube 등) */
+function LinkCta({ href, label, className = '' }) {
+  if (!href) return null;
+  return (
+    <a className={`cta cta--sm ${className}`} href={href} {...ext(href)}>
+      <span className="cta__l">{label}</span>
+      <span className="cta__a" aria-hidden="true">↗</span>
+    </a>
+  );
+}
+
 /* 공통 래퍼 */
 function Sec({ s, children, className = '', srcMap, pad = true }) {
   return (
@@ -195,6 +208,12 @@ function CaseCard({ c, s, i, children }) {
       <div className="cc__meta"><span>{c.name}</span><span className="tnum sub">{c.meta}</span></div>
       {c.hover_copy && <p className="sr-only">{c.hover_copy.join(' ')}</p>}
       {children}
+      {(c.guide || c.link) && (
+        <div className="cc__links">
+          {c.guide && <LinkCta href={c.guide} label="활동 가이드 바로가기" />}
+          {c.link && <LinkCta href={c.link.href} label={c.link.label} />}
+        </div>
+      )}
     </article>
   );
 }
@@ -221,7 +240,7 @@ export function See({ s, srcMap }) {
       <ol className="tp-grid">
         {s.touchpoints.map((t, i) => (
           <li key={t} className="rb" style={{ '--i': i % 4 }}>
-            {s.touchpoint_images?.[i] && <span className="tp-img"><Media file={s.touchpoint_images[i]} ratio="4 / 3" alt={t} /></span>}
+            {s.touchpoint_images?.[i] && <span className="tp-img"><Media file={s.touchpoint_images[i]} ratio="16 / 9" alt={t} /></span>}
             <span className="tp-txt"><span className="mute tnum">{String(i + 1).padStart(2, '0')}</span>{t}</span>
           </li>
         ))}
@@ -238,6 +257,11 @@ export function See({ s, srcMap }) {
         ))}
       </div>
       <p className="chorus rb">상상으로 세상을 이롭게 한다 <span className="note">세 곡의 공통 후렴 · Mission · {s.bgm.versions.join(' · ')}</span></p>
+      {s.bgm.youtube && (
+        <div className="sec__block rb">
+          <VideoFacade title={s.bgm.youtube.title} caption={s.bgm.youtube.caption} embed={s.bgm.youtube.embed} poster={s.bgm.youtube.poster} />
+        </div>
+      )}
 
       <div className="sec__block"><Stats items={s.stats} /></div>
 
@@ -263,6 +287,9 @@ export function Do({ s, srcMap }) {
   return (
     <Sec s={s} srcMap={srcMap}>
       <SecHead s={s} />
+      {s.guide_all && (
+        <div className="grid"><div style={{ gridColumn: '3 / span 4' }} className="rb"><LinkCta href={s.guide_all.href} label={s.guide_all.label} /></div></div>
+      )}
       <SubHead label="(Routines)" title={s.routines.title} />
       <div className="grid ccards">
         {s.routines.items.map((it, i) => (
@@ -509,7 +536,7 @@ export function MadeWithAi({ s, srcMap }) {
       <SecHead s={s} />
       <div className="grid ccards">
         {s.items.map((it, i) => (
-          <CaseCard key={it.name} i={i} s={s} c={{ name: it.name, meta: it.type, hover_copy: it.hover_copy, media: it.asset || `ai-${i}.png` }}>
+          <CaseCard key={it.name} i={i} s={s} c={{ name: it.name, meta: it.type, hover_copy: it.hover_copy, media: it.asset || `ai-${i}.png`, link: it.link }}>
             <p className="cc__desc">{it.desc}</p>
             <div className="hl" style={{ marginTop: 16 }}>
               <div className="hl__row" style={{ minHeight: 48, padding: '10px 0' }}><span className="c3 note">담당</span><span className="c9">{it.owner}</span></div>

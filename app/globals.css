@@ -267,8 +267,9 @@ main { position: relative; z-index: 2; background: var(--c-bg); transition: back
 
 /* ---------- 11. 미디어 · 자리표시자 ---------- */
 .media { position: relative; aspect-ratio: 8 / 9; background: var(--card-bg); overflow: hidden; }
-.media img, .media video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter 600ms var(--ease-quint); }
-.media video { object-fit: contain; background: #111; }
+.media img, .media video { width: 100%; height: 100%; object-fit: contain; filter: grayscale(1) contrast(1.05); transition: filter 600ms var(--ease-quint); }
+.media--pad img, .media--pad video { padding: max(16px, 6%); }
+.media video { background: transparent; }
 .media__ph { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; border: 1px solid var(--line-weak); }
 .media__ph .note { max-width: 32ch; }
 .media__ph-x { position: absolute; inset: 0; pointer-events: none; }
@@ -371,7 +372,7 @@ main { position: relative; z-index: 2; background: var(--c-bg); transition: back
 .cc__desc { margin-top: 14px; color: var(--text-sub); max-width: 52ch; }
 .cc__stats { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px var(--gap); }
 .cc__stat { border-top: 1px solid var(--line-strong); padding-top: 10px; }
-.cc__stat b { display: block; font-weight: 500; font-size: max(28px, 2.3vw); line-height: 1.05; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.cc__stat b { display: block; font-weight: 500; font-size: max(28px, 2.3vw); line-height: 1.05; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .cc__stat span { display: block; margin-top: 6px; font-size: 13px; color: var(--text-sub); line-height: 1.4; }
 .cc__extra { margin-top: 16px; }
 .variants { display: grid; gap: 0; margin-top: 16px; }
@@ -393,7 +394,7 @@ main { position: relative; z-index: 2; background: var(--c-bg); transition: back
 
 .vs { align-items: end; }
 .vs__item { grid-column: span 6; border-top: 1px solid var(--line-strong); padding-top: 18px; }
-.vs__v { font-size: var(--fs-mega); line-height: 0.9; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.vs__v { font-size: var(--fs-mega); line-height: 0.9; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .vs__item--mute .vs__v { color: var(--text-mute); }
 
 /* SHARE */
@@ -608,3 +609,28 @@ main { position: relative; z-index: 2; background: var(--c-bg); transition: back
   .intro, .cursor { display: none; }
   .header { transform: none; }
 }
+
+/* ---------- 27. 링크 CTA · BGM 플레이어 ---------- */
+.cta--sm { min-width: 0; gap: 14px; padding: 10px 0; font-size: 13px; }
+.cc__links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 18px; }
+.bgm { position: fixed; z-index: 150; top: calc(var(--header-h) / 2 - 18px); left: calc(50% + 44px); display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.bgm__btn { min-height: 36px !important; }
+@media (max-width: 959px) {
+  .bgm { top: auto; left: auto; right: var(--pad); bottom: var(--pad); flex-direction: column-reverse; align-items: flex-end; }
+  .bgm__btn { min-height: 44px !important; background: rgb(var(--bg) / .6); }
+}
+.bgm__btn {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px;
+  border: 1px solid #fff; color: #fff; mix-blend-mode: difference; font-size: 13px; font-weight: 700; border-radius: 999px;
+}
+.bgm__eq { display: inline-flex; gap: 2px; align-items: flex-end; height: 12px; }
+.bgm__eq i { width: 2px; height: 4px; background: currentColor; }
+.bgm.is-on .bgm__eq i { animation: eq 900ms ease-in-out infinite; }
+.bgm.is-on .bgm__eq i:nth-child(2) { animation-delay: 150ms; }
+.bgm.is-on .bgm__eq i:nth-child(3) { animation-delay: 300ms; }
+@keyframes eq { 0%, 100% { height: 3px; } 50% { height: 12px; } }
+.bgm__panel { order: 2; width: 240px; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line-strong); }
+.bgm__btn { order: 1; }
+.bgm__panel iframe { width: 100%; height: 100%; border: 0; display: block; }
+.has-footer .bgm { opacity: 0; pointer-events: none; }
+@media (max-width: 559px) { .bgm__panel { width: 180px; } }
