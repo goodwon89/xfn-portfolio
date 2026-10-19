@@ -1,5 +1,5 @@
 import { Lines, Html, Inline, SecHead, Body, Sources, Stat, Stats, Bars, Dumbbell, DbLegend, Media, assetDesc } from './ui';
-import { Quiz, BlindQuiz, Tabs, VideoFacade } from './client';
+import { Quiz, BlindQuiz, Tabs, VideoFacade, BgmTrigger, BgmCta } from './client';
 
 const ext = (href) => (/^https?:/.test(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
 
@@ -77,16 +77,16 @@ export function Glance({ s, srcMap }) {
         <div className="glance__skills rb">
           <p className="small-label">Skills</p>
           <div className="chips">{s.skills.map((k) => <span key={k} className="chip">{k}</span>)}</div>
+          {s.video && (
+            <div className="glance__video">
+              <VideoFacade title={s.video.title} caption={s.video.caption} embed={s.video.embed} poster={s.video.poster} />
+            </div>
+          )}
         </div>
         <div className="glance__tldr">
           {s.tldr.map((t, i) => <Inline key={i} as="p" text={t} className="rb" />)}
         </div>
       </div>
-      {s.video && (
-        <div className="sec__block rb">
-          <VideoFacade title={s.video.title} caption={s.video.caption} embed={s.video.embed} poster={s.video.poster} />
-        </div>
-      )}
       <div className="sec__block"><Stats items={s.stats} /></div>
     </Sec>
   );
@@ -240,7 +240,13 @@ export function See({ s, srcMap }) {
       <ol className="tp-grid">
         {s.touchpoints.map((t, i) => (
           <li key={t} className="rb" style={{ '--i': i % 4 }}>
-            {s.touchpoint_images?.[i] && <span className="tp-img"><Media file={s.touchpoint_images[i]} ratio="16 / 9" alt={t} /></span>}
+            {s.touchpoint_images?.[i] && (
+              i === s.touchpoints.length - 1 && s.bgm?.youtube ? (
+                <BgmTrigger label={t}><span className="tp-img"><Media file={s.touchpoint_images[i]} ratio="16 / 9" alt={t} /></span></BgmTrigger>
+              ) : (
+                <span className="tp-img"><Media file={s.touchpoint_images[i]} ratio="16 / 9" alt={t} /></span>
+              )
+            )}
             <span className="tp-txt"><span className="mute tnum">{String(i + 1).padStart(2, '0')}</span>{t}</span>
           </li>
         ))}
@@ -257,11 +263,7 @@ export function See({ s, srcMap }) {
         ))}
       </div>
       <p className="chorus rb">상상으로 세상을 이롭게 한다 <span className="note">세 곡의 공통 후렴 · Mission · {s.bgm.versions.join(' · ')}</span></p>
-      {s.bgm.youtube && (
-        <div className="sec__block rb">
-          <VideoFacade title={s.bgm.youtube.title} caption={s.bgm.youtube.caption} embed={s.bgm.youtube.embed} poster={s.bgm.youtube.poster} />
-        </div>
-      )}
+      {s.bgm.youtube && <div className="rb" style={{ marginTop: 20 }}><BgmCta /></div>}
 
       <div className="sec__block"><Stats items={s.stats} /></div>
 

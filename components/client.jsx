@@ -441,6 +441,11 @@ export function VideoFacade({ title, caption, embed, poster }) {
 ------------------------------------------------------------------- */
 export function BgmPlayer({ id, label = 'WR BGM' }) {
   const [on, setOn] = useState(false);
+  useEffect(() => {
+    const play = () => setOn(true);
+    window.addEventListener('bgm:play', play);
+    return () => window.removeEventListener('bgm:play', play);
+  }, []);
   return (
     <div className={`bgm ${on ? 'is-on' : ''}`}>
       {on && (
@@ -457,5 +462,28 @@ export function BgmPlayer({ id, label = 'WR BGM' }) {
         {on ? `■ ${label} 끄기` : `♪ ${label} 듣기`}
       </button>
     </div>
+  );
+}
+
+/** 접점 08(공용공간 BGM) 이미지 — 마우스를 올리면 재생 안내, 클릭하면 상단 BGM 플레이어가 재생된다. */
+export function BgmTrigger({ label, children }) {
+  return (
+    <button type="button" className="tp-bgm" data-cursor="PLAY · WR BGM"
+            onClick={() => window.dispatchEvent(new CustomEvent('bgm:play'))}
+            aria-label={`${label} — 클릭하면 WR BGM이 재생됩니다`}>
+      {children}
+      <span className="tp-bgm__hint" aria-hidden="true">
+        <span className="tp-bgm__ring"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" /></svg></span>
+        클릭하면 WR BGM이 재생됩니다
+      </span>
+    </button>
+  );
+}
+
+export function BgmCta({ label = 'WR BGM 듣기' }) {
+  return (
+    <button type="button" className="cta cta--sm" onClick={() => window.dispatchEvent(new CustomEvent('bgm:play'))}>
+      <span className="cta__l">♪ {label}</span><span className="cta__a" aria-hidden="true">▶</span>
+    </button>
   );
 }
