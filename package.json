@@ -1,0 +1,19 @@
+{
+  "name": "xfn-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Winning Rules, 일상의 언어가 되다 — XFN PJT 케이스 스터디 포트폴리오",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "npx --yes serve@14.2.4 out"
+  },
+  "dependencies": {
+    "gray-matter": "4.0.3",
+    "lenis": "1.1.13",
+    "marked": "12.0.2",
+    "next": "14.2.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
